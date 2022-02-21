@@ -82,7 +82,7 @@ class Pismenost(models.Model):
 
 class Stanovnik(models.Model):
     ime = models.CharField(max_length=255)
-    godina_rodjenja = models.DateTimeField()
+    godina_rodjenja = models.DateField()
     grad_id = models.ForeignKey(Grad,on_delete=models.CASCADE)
     godina_id = models.ForeignKey(Godina,on_delete=models.CASCADE)
     pol_id = models.ForeignKey(Pol,on_delete=models.CASCADE)
@@ -95,10 +95,8 @@ class Stanovnik(models.Model):
     racunarska_pismenost_id = models.ForeignKey(RacunarksaPismenost,on_delete=models.CASCADE)
     obrazovanje_id = models.ForeignKey(StepenObrazovanja,on_delete=models.CASCADE,related_name='obrazovanje')
     pismenost_id = models.ForeignKey(Pismenost,on_delete=models.CASCADE)
+    strani_jezici = models.ManyToManyField(StraniJezik,related_name='strani_jezici')
 
     def __str__(self):
         return self.ime
 
-class StanovnikStraniJezik(models.Model):
-    stanovnik_id = models.ForeignKey(Stanovnik,on_delete=models.CASCADE,related_name='stanovnik')
-    strani_jezik_id = models.ForeignKey(StraniJezik,on_delete=models.CASCADE,related_name='strani_jezik')

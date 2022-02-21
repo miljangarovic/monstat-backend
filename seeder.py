@@ -88,28 +88,28 @@ models.MaternjiJezik.objects.create(naziv='slovenacki')
 
 # unos nacionalnosti
 
-models.Nacionalnost.objects.create(naziv='Srbi')
-models.Nacionalnost.objects.create(naziv='Crnogorci')
-models.Nacionalnost.objects.create(naziv='Bosnjaci')
-models.Nacionalnost.objects.create(naziv='Albanci')
-models.Nacionalnost.objects.create(naziv='Muslimani')
-models.Nacionalnost.objects.create(naziv='Hrvati')
-models.Nacionalnost.objects.create(naziv='Bosanci')
-models.Nacionalnost.objects.create(naziv='Bosnjaci-Muslimani')
-models.Nacionalnost.objects.create(naziv='Crnogorci-Muslimani')
-models.Nacionalnost.objects.create(naziv='Crnogorci-Srbi')
-models.Nacionalnost.objects.create(naziv='Srbi-Crnogorci')
-models.Nacionalnost.objects.create(naziv='Egipcani')
-models.Nacionalnost.objects.create(naziv='Jugosloveni')
-models.Nacionalnost.objects.create(naziv='Italijani')
-models.Nacionalnost.objects.create(naziv='Makedonci')
-models.Nacionalnost.objects.create(naziv='Madjari')
-models.Nacionalnost.objects.create(naziv='Romi')
-models.Nacionalnost.objects.create(naziv='Rusi')
-models.Nacionalnost.objects.create(naziv='Njemci')
-models.Nacionalnost.objects.create(naziv='Turci')
+models.Nacionalnost.objects.create(naziv='Srbin')
+models.Nacionalnost.objects.create(naziv='Crnogorac')
+models.Nacionalnost.objects.create(naziv='Bosnjack')
+models.Nacionalnost.objects.create(naziv='Albanac')
+models.Nacionalnost.objects.create(naziv='Musliman')
+models.Nacionalnost.objects.create(naziv='Hrvat')
+models.Nacionalnost.objects.create(naziv='Bosanac')
+models.Nacionalnost.objects.create(naziv='Bosnjak-Musliman')
+models.Nacionalnost.objects.create(naziv='Crnogorac-Musliman')
+models.Nacionalnost.objects.create(naziv='Crnogorac-Srbin')
+models.Nacionalnost.objects.create(naziv='Srbin-Crnogorac')
+models.Nacionalnost.objects.create(naziv='Egipcanin')
+models.Nacionalnost.objects.create(naziv='Jugosloven')
+models.Nacionalnost.objects.create(naziv='Italijan')
+models.Nacionalnost.objects.create(naziv='Makedonac')
+models.Nacionalnost.objects.create(naziv='Madjar')
+models.Nacionalnost.objects.create(naziv='Rom')
+models.Nacionalnost.objects.create(naziv='Rus')
+models.Nacionalnost.objects.create(naziv='Njemac')
+models.Nacionalnost.objects.create(naziv='Turcin')
 models.Nacionalnost.objects.create(naziv='Ne zeli da se izjasni')
-models.Nacionalnost.objects.create(naziv='Slovenci')
+models.Nacionalnost.objects.create(naziv='Slovenac')
 
 # unos ekonomske aktivnosti
 
@@ -123,6 +123,53 @@ models.EkonomskaAktivnost.objects.create(naziv='Penzioner')
 models.EkonomskaAktivnost.objects.create(naziv='Ostalo')
 
 # unos bracnog statusa
+
+models.BracniStatus.objects.create(naziv='Neudata/Neozenjen')
+models.BracniStatus.objects.create(naziv='Udata/Ozenjen')
+models.BracniStatus.objects.create(naziv='Razvedena/Razveden')
+models.BracniStatus.objects.create(naziv='Udovica/Udovac')
+models.BracniStatus.objects.create(naziv='Bez odgovora')
+
+# unos racunarske pismenosti
+
+models.RacunarksaPismenost.objects.create(naziv='Kompjuterski pismen')
+models.RacunarksaPismenost.objects.create(naziv='Djelimicno poznavanje rada na racunaru')
+models.RacunarksaPismenost.objects.create(naziv='Ne poznavanje rada na racunaru')
+models.RacunarksaPismenost.objects.create(naziv='Bez odgovora')
+
+# unos stepena obrazovanja
+
+models.StepenObrazovanja.objects.create(naziv='Bez skole')
+models.StepenObrazovanja.objects.create(naziv='Nepotpuna osnovna skola')
+models.StepenObrazovanja.objects.create(naziv='Osnovna skola')
+models.StepenObrazovanja.objects.create(naziv='Srednja skola')
+models.StepenObrazovanja.objects.create(naziv='Visoka skola i prvi stepen fakulteta')
+models.StepenObrazovanja.objects.create(naziv='Visoka skola, fakultet')
+models.StepenObrazovanja.objects.create(naziv='Doktorat')
+models.StepenObrazovanja.objects.create(naziv='Osnovne akademske studije')
+models.StepenObrazovanja.objects.create(naziv='Osnovne akademske studije')
+models.StepenObrazovanja.objects.create(naziv='Specijalsiticke studije')
+models.StepenObrazovanja.objects.create(naziv='Magistarske studije')
+
+# unos pismenosti
+
+models.Pismenost.objects.create(naziv='Pismen')
+models.Pismenost.objects.create(naziv='Nepismen')
+
+# unos jezika
+
+models.StraniJezik.objects.create(naziv='Engleski')
+models.StraniJezik.objects.create(naziv='Ruski')
+models.StraniJezik.objects.create(naziv='Italijanski')
+models.StraniJezik.objects.create(naziv='Njemacki')
+models.StraniJezik.objects.create(naziv='Francuski')
+models.StraniJezik.objects.create(naziv='Spanski')
+models.StraniJezik.objects.create(naziv='Portugalski')
+models.StraniJezik.objects.create(naziv='Turski')
+models.StraniJezik.objects.create(naziv='Arapski')
+models.StraniJezik.objects.create(naziv='Kineski')
+models.StraniJezik.objects.create(naziv='Ostalo')
+
 
 
 
