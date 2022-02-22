@@ -5,8 +5,8 @@ from django.db import models
 class Grad(models.Model):
     naziv = models.CharField(max_length=255)
 
-    # def __str__(self):
-    #     return self.naziv
+    def __str__(self):
+        return self.naziv
 
 class Godina(models.Model):
     godina = models.DateField()

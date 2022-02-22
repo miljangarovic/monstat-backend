@@ -1,5 +1,6 @@
 import datetime
 import os
+import random
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'monstat.settings')
 
@@ -7,12 +8,15 @@ import django
 
 django.setup()
 
+from faker import Faker
+
+fake = Faker()
+
 import datetime
 from stanovnici import models
 
-
 # Unos godine
-models.Godina.objects.create(godina=datetime.date(2011,1,1))
+models.Godina.objects.create(godina=datetime.date(2011, 1, 1))
 
 # Unos gradova
 models.Grad.objects.create(naziv='Andrijevica')
@@ -170,11 +174,51 @@ models.StraniJezik.objects.create(naziv='Arapski')
 models.StraniJezik.objects.create(naziv='Kineski')
 models.StraniJezik.objects.create(naziv='Ostalo')
 
+# unos osoba
+
+gradovi = list(models.Grad.objects.all())
+polovi = list(models.Pol.objects.all())
+godina = list(models.Godina.objects.all())
+pismenost = list(models.Pismenost.objects.all())
+drzavljanstva = list(models.Drzavljanstvno.objects.all())
+vjeroispovijesti = list(models.Vjeroispovijest.objects.all())
+m_jezici = list(models.MaternjiJezik.objects.all())
+nacionalnosti = list(models.Nacionalnost.objects.all())
+ek_aktivnosti = list(models.EkonomskaAktivnost.objects.all())
+bracni_statusi = list(models.BracniStatus.objects.all())
+racunarske_pismenosti = list(models.RacunarksaPismenost.objects.all())
+obrazovanja = list(models.StepenObrazovanja.objects.all())
+s_jezici = list(models.StraniJezik.objects.all())
 
 
+def seed(N=10):
+    for person in range(N):
+        # create fake data
+        fake_name = fake.first_name() + ' ' + fake.last_name()
+        fake_city = random.choice(gradovi)
+        fake_pol = random.choice(polovi)
+        fake_godina = random.choice(godina)
+        fake_drzavljanstvo = random.choice(drzavljanstva)
+        fake_vjeroispovijest = random.choice(vjeroispovijesti)
+        fake_m_jezik = random.choice(m_jezici)
+        fake_nacionalnost = random.choice(nacionalnosti)
+        fake_ek_aktivnost = random.choice(ek_aktivnosti)
+        fake_brakcni_status = random.choice(bracni_statusi)
+        fake_racunarksa_pismenost = random.choice(racunarske_pismenosti)
+        fake_obrazovanje = random.choice(obrazovanja)
+        fake_strani_jezici = random.choices(s_jezici,k=2)
+        fake_pismenost = random.choice(pismenost)
+        fake_godin_rodjenja = datetime.date(random.randint(1920,2022), random.randint(1,12), random.randint(1,28))
+        print(fake_strani_jezici)
+        # Create new Stanovnik
+        stanovnik = models.Stanovnik.objects.create(ime=fake_name, grad_id=fake_city, godina_id=fake_godina, pol_id=fake_pol, drzavljanstvo_id=fake_drzavljanstvo, nacionalnost_id=fake_nacionalnost,
+                                jezik_id=fake_m_jezik,vjeroispovijest_id=fake_vjeroispovijest,ekonomska_aktivnost_id=fake_ek_aktivnost,
+                                bracni_status_id=fake_brakcni_status,racunarska_pismenost_id=fake_racunarksa_pismenost,obrazovanje_id=fake_obrazovanje,
+                                pismenost_id=fake_pismenost,godina_rodjenja=fake_godin_rodjenja,)
+        stanovnik.strani_jezici.set(fake_strani_jezici)
+        stanovnik.save()
 
-
-
-
-
-
+if __name__=='__main__':
+    print('populating script!')
+    seed(5)
+    print("Populating complete")
