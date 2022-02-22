@@ -5,8 +5,8 @@ from django.db import models
 class Grad(models.Model):
     naziv = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.naziv
+    # def __str__(self):
+    #     return self.naziv
 
 class Godina(models.Model):
     godina = models.DateField()
@@ -83,7 +83,7 @@ class Pismenost(models.Model):
 class Stanovnik(models.Model):
     ime = models.CharField(max_length=255)
     godina_rodjenja = models.DateField()
-    grad_id = models.ForeignKey(Grad,on_delete=models.CASCADE)
+    grad_id = models.ForeignKey(Grad,on_delete=models.CASCADE,related_name='stanovnici')
     godina_id = models.ForeignKey(Godina,on_delete=models.CASCADE)
     pol_id = models.ForeignKey(Pol,on_delete=models.CASCADE)
     drzavljanstvo_id = models.ForeignKey(Drzavljanstvno,on_delete=models.CASCADE)
@@ -99,4 +99,6 @@ class Stanovnik(models.Model):
 
     def __str__(self):
         return self.ime
+
+
 

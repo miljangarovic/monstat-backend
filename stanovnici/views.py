@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from .models import Stanovnik
-import json
-# Create your views here.
-
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import serializers
-from stanovnici.serializers import UserSerializer, GroupSerializer,StanovnikSerializer,GradSerializer
+from stanovnici.serializers import UserSerializer, GroupSerializer, StanovnikSerializer, GradSerializer
 from .models import Grad
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
@@ -22,30 +19,23 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
 class StanovnikViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Stanovnik.objects.all()
+    queryset = Stanovnik.objects.select_related('grad_id').all()
     serializer_class = StanovnikSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
-def grad_list(request):
+
+def gradovi(request):
     """
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        snippets = Grad.objects.all()
-        serializer = GradSerializer(snippets, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        gradovi = Grad.objects.all()
+        serializer = GradSerializer(gradovi, many=True)
+        return JsonResponse(serializer.data, safe=False, status=200)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
@@ -55,13 +45,15 @@ def grad_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+
 def stanovnici(request):
     """
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        snippets = Stanovnik.objects.all()
-        serializer = StanovnikSerializer(snippets, many=True)
+        stanovnici = Stanovnik.objects.all()
+        serializer = StanovnikSerializer(stanovnici, many=True)
+        print(serializer)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -71,4 +63,3 @@ def stanovnici(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
-

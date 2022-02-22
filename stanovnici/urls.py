@@ -18,5 +18,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('/all-people',views.StanovnikViewSet.as_view())
+    path('/all-people',views.stanovnici),
+    path('/all-cities',views.gradovi)
 ]
