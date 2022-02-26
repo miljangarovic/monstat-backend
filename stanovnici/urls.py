@@ -4,16 +4,21 @@ from . import views
 
 urlpatterns = [
 
-    path('people', views.stanovnici),
-    path('people/<int:pk>', views.updateOrDeleteStanovnik),
-    path('cities', views.gradovi),
-    path('cities/<int:pk>', views.updateOrDeleteGrad),
-    path('years', views.godine),
-    path('years/<int:pk>', views.updateOrDeleteGodina),
+    path('stanovnici', views.stanovnici),
+    path('stanovnici/<int:pk>', views.updateOrDeleteStanovnik),
+
+    path('gradovi', views.gradovi),
+    path('gradovi/<int:pk>', views.updateOrDeleteGrad),
+
+    path('godine', views.godine),
+    path('godine/<int:pk>', views.updateOrDeleteGodina),
+
     path('drzavljanstva', views.drzavljanstva),
     path('drzavljanstva/<int:pk>', views.updateOrDeleteDrzavljanstvo),
+
     path('maternji-jezici', views.maternjiJezici),
     path('maternji-jezici/<int:pk>', views.updateOrDeleteMaternjiJezik),
+
     path('strani-jezici', views.straniJezik),
     path('strani-jezici/<int:pk>', views.updateOrDeleteStraniJezik),
 
