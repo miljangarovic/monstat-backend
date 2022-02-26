@@ -206,19 +206,23 @@ def seed(N=10):
         fake_brakcni_status = random.choice(bracni_statusi)
         fake_racunarksa_pismenost = random.choice(racunarske_pismenosti)
         fake_obrazovanje = random.choice(obrazovanja)
-        fake_strani_jezici = random.choices(s_jezici,k=2)
+        fake_strani_jezici = random.choices(s_jezici, k=2)
         fake_pismenost = random.choice(pismenost)
-        fake_godin_rodjenja = datetime.date(random.randint(1920,2022), random.randint(1,12), random.randint(1,28))
-        print(fake_strani_jezici)
+        fake_godin_rodjenja = datetime.date(random.randint(1920, 2022), random.randint(1, 12), random.randint(1, 28))
         # Create new Stanovnik
-        stanovnik = models.Stanovnik.objects.create(ime=fake_name, grad_id=fake_city, godina_id=fake_godina, pol_id=fake_pol, drzavljanstvo_id=fake_drzavljanstvo, nacionalnost_id=fake_nacionalnost,
-                                jezik_id=fake_m_jezik,vjeroispovijest_id=fake_vjeroispovijest,ekonomska_aktivnost_id=fake_ek_aktivnost,
-                                bracni_status_id=fake_brakcni_status,racunarska_pismenost_id=fake_racunarksa_pismenost,obrazovanje_id=fake_obrazovanje,
-                                pismenost_id=fake_pismenost,godina_rodjenja=fake_godin_rodjenja,)
+        stanovnik = models.Stanovnik.objects.create(ime=fake_name, grad=fake_city, godina=fake_godina, pol=fake_pol,
+                                                    drzavljanstvo=fake_drzavljanstvo, nacionalnost=fake_nacionalnost,
+                                                    jezik=fake_m_jezik, vjeroispovijest=fake_vjeroispovijest,
+                                                    ekonomska_aktivnost=fake_ek_aktivnost,
+                                                    bracni_status=fake_brakcni_status,
+                                                    racunarska_pismenost=fake_racunarksa_pismenost,
+                                                    obrazovanje=fake_obrazovanje,
+                                                    pismenost=fake_pismenost, godina_rodjenja=fake_godin_rodjenja, )
         stanovnik.strani_jezici.set(fake_strani_jezici)
         stanovnik.save()
 
-if __name__=='__main__':
-    print('populating script!')
+
+if __name__ == '__main__':
+    print('Seeding script!')
     seed(5)
-    print("Populating complete")
+    print("Seeding completed!")

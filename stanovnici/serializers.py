@@ -7,18 +7,14 @@ from .models import Stanovnik, Grad, Godina, Drzavljanstvno, Pol, Vjeroispovijes
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['username', 'email', 'groups']
 
-
-class GroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
 
 class GradSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grad
         exclude = []
+
 
 class GodinaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -80,26 +76,30 @@ class PismenostSerializer(serializers.ModelSerializer):
         model = Pismenost
         exclude = []
 
-
 class StanovnikSerializer(serializers.ModelSerializer):
-
-    grad_id = GradSerializer()
-    godina_id = GodinaSerializer()
-    pol_id = PolSerializer()
-    drzavljanstvo_id = DrzavljanstvnoSerializer()
-    vjeroispovijest_id = VjeroispovijestSerializer()
-    jezik_id = MaternjiJezikSerializer()
-    nacionalnost_id = NacionalnostSerializer()
-    ekonomska_aktivnost_id = EkonomskaAktivnostSerializer()
-    bracni_status_id = BracniStatusSerializer()
-    racunarska_pismenost_id = RacunarksaPismenostSerializer()
-    obrazovanje_id = StepenObrazovanjaSerializer()
-    pismenost_id = PismenostSerializer()
+    grad = GradSerializer()
+    godina = GodinaSerializer()
+    pol = PolSerializer()
+    drzavljanstvo = DrzavljanstvnoSerializer()
+    vjeroispovijest = VjeroispovijestSerializer()
+    jezik = MaternjiJezikSerializer()
+    nacionalnost = NacionalnostSerializer()
+    ekonomska_aktivnost = EkonomskaAktivnostSerializer()
+    bracni_status = BracniStatusSerializer()
+    racunarska_pismenost = RacunarksaPismenostSerializer()
+    obrazovanje = StepenObrazovanjaSerializer()
+    pismenost = PismenostSerializer()
     strani_jezici = StraniJezikSerializer(many=True)
+    broj_stranih_jezika = serializers.SerializerMethodField()
 
     class Meta:
         model = Stanovnik
-        exclude = []
+        fields = '__all__'
+
+    def get_broj_stranih_jezika(self,object):
+        strani_jezici = object.strani_jezici
+        serializer = StraniJezikSerializer(strani_jezici,many=True)
+        return len(serializer.data)
 
 
 
