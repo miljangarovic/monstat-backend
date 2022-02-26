@@ -20,7 +20,7 @@ class Pol(models.Model):
     def __str__(self):
         return self.naziv
 
-class Drzavljanstvno(models.Model):
+class Drzavljanstvo(models.Model):
     naziv = models.CharField(max_length=255)
 
     def __str__(self):
@@ -86,7 +86,7 @@ class Stanovnik(models.Model):
     grad = models.ForeignKey(Grad,on_delete=models.CASCADE,related_name='stanovnici')
     godina = models.ForeignKey(Godina,on_delete=models.CASCADE)
     pol = models.ForeignKey(Pol,on_delete=models.CASCADE)
-    drzavljanstvo = models.ForeignKey(Drzavljanstvno,on_delete=models.CASCADE)
+    drzavljanstvo = models.ForeignKey(Drzavljanstvo,on_delete=models.CASCADE)
     vjeroispovijest = models.ForeignKey(Vjeroispovijest,on_delete=models.CASCADE)
     jezik = models.ForeignKey(MaternjiJezik,on_delete=models.CASCADE)
     nacionalnost = models.ForeignKey(Nacionalnost,on_delete=models.CASCADE)

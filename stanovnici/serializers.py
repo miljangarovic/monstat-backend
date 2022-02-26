@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Stanovnik, Grad, Godina, Drzavljanstvno, Pol, Vjeroispovijest, MaternjiJezik, Nacionalnost, \
+from .models import Stanovnik, Grad, Godina, Drzavljanstvo, Pol, Vjeroispovijest, MaternjiJezik, Nacionalnost, \
     EkonomskaAktivnost, BracniStatus, RacunarksaPismenost, StepenObrazovanja, StraniJezik, Pismenost
 
 
@@ -9,12 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'groups']
 
-
 class GradSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grad
         exclude = []
-
 
 class GodinaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,9 +24,9 @@ class PolSerializer(serializers.ModelSerializer):
         model = Pol
         exclude = []
 
-class DrzavljanstvnoSerializer(serializers.ModelSerializer):
+class DrzavljanstvoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Drzavljanstvno
+        model = Drzavljanstvo
         exclude = []
 
 class MaternjiJezikSerializer(serializers.ModelSerializer):
@@ -80,7 +78,7 @@ class StanovnikSerializer(serializers.ModelSerializer):
     grad = GradSerializer()
     godina = GodinaSerializer()
     pol = PolSerializer()
-    drzavljanstvo = DrzavljanstvnoSerializer()
+    drzavljanstvo = DrzavljanstvoSerializer()
     vjeroispovijest = VjeroispovijestSerializer()
     jezik = MaternjiJezikSerializer()
     nacionalnost = NacionalnostSerializer()
