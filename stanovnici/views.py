@@ -560,9 +560,21 @@ def ukupno(request):
 
 
     query_params = request.query_params
-    if (query_params['group_by'] and query_params['order_by']):
-        query_params_groupBy =  query_params['group_by'].split(',')
-        query_params_orderBy = query_params['order_by'].split(',')
-        res = Stanovnik.objects.values('grad__naziv','pol__naziv').order_by().annotate(count = Count('id'))
-    res = res.order_by('grad__naziv')
-    return Response(res, status=200)
+    try:
+        if ('group_by' in query_params) and ('order_by' in query_params):
+            query_params_groupBy =  query_params['group_by'].split(',')
+            for i,query_param_groupBy in enumerate(query_params_groupBy):
+                query_params_groupBy[i] = query_param_groupBy + '__naziv'
+            query_params_orderBy = query_params['order_by'].split(',')
+            for i,query_param_orderBy in enumerate(query_params_orderBy):
+                query_params_orderBy[i] = query_param_orderBy + '__naziv'
+            res = Stanovnik.objects.values(*query_params_groupBy).order_by(*query_params_orderBy).annotate(count = Count('id'))
+        elif 'group_by' in query_params:
+            query_params_groupBy = query_params['group_by'].split(',')
+            for i,query_param_groupBy in enumerate(query_params_groupBy):
+                query_params_groupBy[i] = query_param_groupBy + '__naziv'
+            res = Stanovnik.objects.values(*query_params_groupBy).annotate(count=Count('id'))
+
+        return Response(res, status=200)
+    except:
+        return Response({"message":"Neispravno grupisanje"}, status=400)
