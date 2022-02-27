@@ -37,4 +37,5 @@ urlpatterns = [
     path('bracni-statusi', views.bracniStatusi),
     path('bracni-statusi/<int:pk>', views.updateOrDeleteBracniStatus),
 
+    path('statistika/ukupno',views.ukupno),
 ]

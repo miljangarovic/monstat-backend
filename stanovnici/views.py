@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import permission_classes, api_view
 from rest_framework.permissions import IsAuthenticated
@@ -6,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 
 from .models import Stanovnik, Godina, Drzavljanstvo, MaternjiJezik, Nacionalnost, EkonomskaAktivnost, BracniStatus, \
-    RacunarksaPismenost, Vjeroispovijest, StepenObrazovanja, StraniJezik
+    RacunarksaPismenost, Vjeroispovijest, StepenObrazovanja, StraniJezik, Pol
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -551,3 +552,17 @@ def updateOrDeleteStraniJezik(request, pk):
         strani_jezik = get_object_or_404(StraniJezik, id=pk)
         strani_jezik.delete()
         return Response(status=200)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def ukupno(request):
+
+
+    query_params = request.query_params
+    if (query_params['group_by'] and query_params['order_by']):
+        query_params_groupBy =  query_params['group_by'].split(',')
+        query_params_orderBy = query_params['order_by'].split(',')
+        res = Stanovnik.objects.values('grad__naziv','pol__naziv').order_by().annotate(count = Count('id'))
+    res = res.order_by('grad__naziv')
+    return Response(res, status=200)
