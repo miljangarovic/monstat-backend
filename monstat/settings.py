@@ -103,7 +103,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'monstat',
-        'USER': 'postgres',
+        'USER': 'miljan',
         'PASSWORD': 'garovic1998@',
         'HOST': '127.0.0.1',
         'PORT': '5432',

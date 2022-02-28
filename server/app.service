@@ -1,0 +1,31 @@
+#[Unit]
+#Description=uWSGI instance to serve monstatpopis.ga project
+#After=network.target
+#
+#[Service]
+#User=root
+#WorkingDirectory=/var/www/nikolak.ml/nikolakblog
+#Environment="PATH=/var/www/nikolak.ml/.venv/bin"
+#ExecStart=/var/www/nikolak.ml/.venv/bin/uwsgi --ini /var/www/nikolak.ml/.venv/etc/uwsgi.ini
+#KillSignal=SIGQUIT
+#Type=notify
+#NotifyAccess=all
+#
+#[Install]
+#WantedBy=multi-user.target
+
+[Unit]
+Description=uWSGI instance to serve monstatpopis.ga project
+After=network.target
+
+[Service]
+User=miljan
+WorkingDirectory=/home/miljan/PycharmProjects/monstat-backend/monstat
+Environment="PATH=/home/miljan/PycharmProjects/monstat-backend/venv/bin"
+ExecStart=/home/miljan/PycharmProjects/monstat-backend/venv/bin/uwsgi --ini /home/miljan/PycharmProjects/monstat-backend/server/uwsgi.ini
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
